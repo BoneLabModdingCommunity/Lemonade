@@ -3,11 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Lemonade Executor V2</title>
+
+<title>Lemonade V3</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
 <style>
+
 *{
     margin:0;
     padding:0;
@@ -18,138 +20,180 @@
 body{
     min-height:100vh;
     background:
-        radial-gradient(circle at top left,#ffe566 0%,transparent 30%),
-        radial-gradient(circle at bottom right,#ffb347 0%,transparent 35%),
-        #090909;
-    overflow:hidden;
-    display:flex;
-    justify-content:center;
-    align-items:center;
+    radial-gradient(circle at top left,#ffe566 0%,transparent 30%),
+    radial-gradient(circle at bottom right,#ffb347 0%,transparent 35%),
+    #090909;
+
     color:white;
+    overflow-x:hidden;
 }
 
-/* Floating blobs */
+/* Background blobs */
 
 .blob{
-    position:absolute;
+    position:fixed;
     border-radius:50%;
-    filter:blur(90px);
-    animation:float 10s ease-in-out infinite;
+    filter:blur(120px);
+    pointer-events:none;
 }
 
 .blob1{
-    width:350px;
-    height:350px;
+    width:400px;
+    height:400px;
     background:#ffe566;
-    top:-100px;
-    left:-100px;
+    top:-150px;
+    left:-150px;
 }
 
 .blob2{
-    width:300px;
-    height:300px;
+    width:350px;
+    height:350px;
     background:#ffb347;
-    bottom:-100px;
-    right:-100px;
-    animation-delay:2s;
+    bottom:-120px;
+    right:-120px;
 }
 
-@keyframes float{
-    0%,100%{
-        transform:translateY(0px);
-    }
-    50%{
-        transform:translateY(-40px);
-    }
+.wrapper{
+    width:100%;
+    padding:50px 20px;
+    display:flex;
+    justify-content:center;
 }
 
 .container{
-    width:min(1100px,92%);
-    padding:40px;
-    border:1px solid rgba(255,255,255,.08);
-    background:rgba(255,255,255,.05);
-    backdrop-filter:blur(20px);
-    border-radius:32px;
-    box-shadow:
-        0 20px 60px rgba(0,0,0,.5),
-        inset 0 1px 0 rgba(255,255,255,.08);
-    z-index:5;
+    width:min(1200px,95%);
 }
 
-.logo-area{
+/* Hero */
+
+.hero{
+    text-align:center;
+}
+
+.title-row{
     display:flex;
-    align-items:center;
     justify-content:center;
-    gap:16px;
+    align-items:center;
+    gap:18px;
 }
 
-.logo-area img{
-    width:68px;
-    height:68px;
-    border-radius:18px;
-    box-shadow:0 0 30px rgba(255,229,102,.35);
+.logo{
+    width:82px;
+    height:82px;
+    border-radius:22px;
+    box-shadow:
+        0 0 40px rgba(255,229,102,.35);
 }
 
-h1{
-    font-size:4rem;
+.hero h1{
+    font-size:4.5rem;
     font-weight:800;
-    background:linear-gradient(90deg,#fff,#ffe566);
+
+    background:linear-gradient(
+        90deg,
+        #ffffff,
+        #ffe566
+    );
+
     -webkit-background-clip:text;
     -webkit-text-fill-color:transparent;
 }
 
-.subtitle{
-    text-align:center;
+.version{
+    display:inline-block;
     margin-top:15px;
-    color:#bdbdbd;
-    font-size:1.05rem;
+    padding:10px 18px;
+    border-radius:999px;
+
+    background:rgba(255,229,102,.12);
+    border:1px solid rgba(255,229,102,.25);
+
+    color:#ffe566;
+    font-weight:700;
 }
 
+.subtitle{
+    margin-top:18px;
+    color:#bcbcbc;
+    font-size:1.1rem;
+}
+
+/* Showcase */
+
+.showcase{
+    margin-top:45px;
+
+    background:rgba(255,255,255,.04);
+    border:1px solid rgba(255,255,255,.08);
+
+    border-radius:28px;
+    padding:18px;
+
+    backdrop-filter:blur(20px);
+}
+
+.showcase img{
+    width:100%;
+    display:block;
+    border-radius:20px;
+}
+
+/* Cards */
+
 .cards{
-    margin-top:55px;
+    margin-top:40px;
+
     display:grid;
     grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
-    gap:30px;
+    gap:24px;
 }
 
 .card{
-    background:rgba(255,255,255,.04);
+    background:rgba(255,255,255,.05);
     border:1px solid rgba(255,255,255,.08);
+
     border-radius:24px;
     padding:30px;
+
+    backdrop-filter:blur(20px);
+
     transition:.35s ease;
     position:relative;
     overflow:hidden;
 }
 
-.card::before{
-    content:"";
-    position:absolute;
-    inset:0;
-    background:linear-gradient(
-        135deg,
-        rgba(255,255,255,.08),
-        transparent
-    );
-    opacity:0;
-    transition:.35s;
-}
-
 .card:hover{
     transform:translateY(-8px);
-    border-color:rgba(255,229,102,.4);
-    box-shadow:0 20px 40px rgba(0,0,0,.35);
+    border-color:rgba(255,229,102,.3);
+
+    box-shadow:
+    0 20px 50px rgba(0,0,0,.4),
+    0 0 40px rgba(255,229,102,.08);
 }
 
-.card:hover::before{
-    opacity:1;
+.badge{
+    position:absolute;
+    top:18px;
+    right:18px;
+
+    padding:8px 14px;
+
+    border-radius:999px;
+
+    background:rgba(255,229,102,.12);
+    border:1px solid rgba(255,229,102,.2);
+
+    color:#ffe566;
+    font-size:.8rem;
+    font-weight:700;
 }
 
 .platform{
     display:flex;
     align-items:center;
-    gap:12px;
-    font-size:1.6rem;
+    gap:14px;
+
+    font-size:1.7rem;
     font-weight:700;
 }
 
@@ -160,65 +204,68 @@ h1{
 }
 
 .desc{
-    margin-top:14px;
-    color:#b9b9b9;
-    line-height:1.7;
+    margin-top:16px;
+    color:#bdbdbd;
+    line-height:1.8;
 }
 
 .download-btn{
-    margin-top:24px;
+    margin-top:25px;
+
     width:100%;
     border:none;
     cursor:pointer;
+
     padding:16px;
     border-radius:16px;
+
     font-size:1rem;
-    font-weight:700;
+    font-weight:800;
+
     color:black;
-    background:linear-gradient(135deg,#ffe566,#ffb347);
+
+    background:linear-gradient(
+        135deg,
+        #ffe566,
+        #ffb347
+    );
+
     transition:.3s ease;
-    position:relative;
 }
 
 .download-btn:hover{
-    transform:translateY(-3px) scale(1.02);
-    box-shadow:0 15px 30px rgba(255,229,102,.35);
+    transform:translateY(-2px);
+    box-shadow:
+    0 15px 35px rgba(255,229,102,.35);
 }
 
-.download-btn:active{
-    transform:scale(.98);
-}
-
-.badge{
-    position:absolute;
-    top:18px;
-    right:18px;
-    padding:8px 14px;
-    border-radius:999px;
-    background:rgba(255,229,102,.15);
-    border:1px solid rgba(255,229,102,.25);
-    color:#ffe566;
-    font-size:.8rem;
-    font-weight:600;
+.soon{
+    background:rgba(255,255,255,.08);
+    color:white;
+    cursor:default;
 }
 
 .footer{
-    margin-top:40px;
     text-align:center;
+    margin-top:40px;
+
     color:#8e8e8e;
-    font-size:.9rem;
 }
+
+/* Mobile */
 
 @media(max-width:768px){
 
-    h1{
-        font-size:2.5rem;
+    .title-row{
+        flex-direction:column;
     }
 
-    .container{
-        padding:25px;
+    .hero h1{
+        font-size:2.8rem;
     }
+
 }
+
 </style>
 </head>
 <body>
@@ -226,18 +273,39 @@ h1{
 <div class="blob blob1"></div>
 <div class="blob blob2"></div>
 
+<div class="wrapper">
 <div class="container">
 
-    <div class="logo-area">
-        <img src="https://i.imgur.com/E2Atkxe.png" alt="Lemonade Logo">
-        <h1>Lemonade Executor</h1>
-    </div>
+    <section class="hero">
 
-    <p class="subtitle">
-        Premium UI Concept • Fast • Smooth • Modern
-    </p>
+        <div class="title-row">
+            <img
+            class="logo"
+            src="https://i.imgur.com/E2Atkxe.png"
+            alt="Lemonade Logo">
 
-    <div class="cards">
+            <h1>Lemonade V3</h1>
+        </div>
+
+        <div class="version">
+            Version 3.0
+        </div>
+
+        <p class="subtitle">
+            Faster • Cleaner • More Powerful
+        </p>
+
+    </section>
+
+    <section class="showcase">
+
+        <img
+        src="https://i.imgur.com/JyKAPfl.png"
+        alt="Lemonade Preview">
+
+    </section>
+
+    <section class="cards">
 
         <!-- macOS -->
 
@@ -247,17 +315,16 @@ h1{
 
             <div class="platform">
 
-                <!-- Apple SVG -->
                 <svg class="icon" viewBox="0 0 384 512">
-                    <path d="M318.7 268.7c-.2-36.7 16.4-64.4 50.3-84.9-19-27.2-47.8-42.2-86-45.2-36.2-2.9-75.8 21.1-90.3 21.1-15.3 0-50.4-20.1-78-20.1C57.4 140 0 185.2 0 275.7c0 26.7 4.9 54.3 14.8 82.8 13.2 37.4 60.7 129 110.2 127.5 25.9-.6 44.2-18.4 77.9-18.4 32.7 0 49.6 18.4 78.6 18.4 49.9-.8 93.1-84.1 105.7-121.7-72.8-34.3-68.5-95.7-68.5-95.6zM241.7 102.8C269.8 69 266.4 38.4 265.6 27c-24.8 1.4-53.5 16.9-69.8 35.9-18 20.6-28.5 46.1-26.2 74.6 26.8 2.1 53.7-11.5 72.1-34.7z"/>
+                    <path d="M318.7 268.7c-.2-36.7 16.4-64.4 50.3-84.9-19-27.2-47.8-42.2-86-45.2-36.2-2.9-75.8 21.1-90.3 21.1-15.3 0-50.4-20.1-78-20.1C57.4 140 0 185.2 0 275.7c0 26.7 4.9 54.3 14.8 82.8 13.2 37.4 60.7 129 110.2 127.5 25.9-.6 44.2-18.4 77.9-18.4 32.7 0 49.6 18.4 78.6 18.4 49.9-.8 93.1-84.1 105.7-121.7-72.8-34.3-68.5-95.7-68.5-95.6z"/>
                 </svg>
 
                 macOS
+
             </div>
 
             <p class="desc">
-                Optimized for Apple devices with a polished glassmorphism
-                interface and buttery-smooth animations.
+                Optimized for Apple devices with smooth performance and a polished experience.
             </p>
 
             <button class="download-btn">
@@ -274,32 +341,59 @@ h1{
 
             <div class="platform">
 
-                <!-- Windows SVG -->
                 <svg class="icon" viewBox="0 0 448 512">
                     <path d="M0 93.7L183.6 68.5V248H0V93.7zm0 324.6L183.6 443V264H0v154.3zM203.8 65.7L448 32v216H203.8V65.7zM448 280v216l-244.2-33.7V280H448z"/>
                 </svg>
 
                 Windows
+
             </div>
 
             <p class="desc">
-                Designed for Windows users with modern styling,
-                responsive effects and sleek download panels.
+                Designed for Windows users with responsive effects and modern styling.
             </p>
 
-           <button class="download-btn"
-onclick="window.location.href='https://github.com/zyrvennturck-beep/Lemonade/releases/download/1.0/LemonadeV2Fixed.rar'">
-    Download for Windows
-</button>
+            <button
+            class="download-btn"
+            onclick="window.location.href='https://github.com/zyrvennturck-beep/Lemonade/releases/download/1.0/Lemonade.rar'">
+                Download for Windows
+            </button>
 
         </div>
 
-    </div>
+        <!-- Android -->
+
+        <div class="card">
+
+            <div class="badge">Android</div>
+
+            <div class="platform">
+
+                <svg class="icon" viewBox="0 0 576 512">
+                    <path d="M420.6 301.9c0 71.8-59.3 130.1-132.6 130.1s-132.6-58.3-132.6-130.1c0-71.7 59.3-130.1 132.6-130.1s132.6 58.4 132.6 130.1z"/>
+                </svg>
+
+                Android
+
+            </div>
+
+            <p class="desc">
+                The Android version is currently being developed and will release soon.
+            </p>
+
+            <button class="download-btn soon">
+                Coming Soon
+            </button>
+
+        </div>
+
+    </section>
 
     <div class="footer">
-        Best Executor • No Viruses • Free & Premium
+        © Lemonade V3 • Modern UI • Windows • macOS • Android
     </div>
 
+</div>
 </div>
 
 </body>
